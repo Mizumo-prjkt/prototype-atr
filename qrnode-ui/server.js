@@ -63,6 +63,36 @@ app.post('/api/staff/signup', async (req, res) => {
   }
 });
 
+// Staff Login Endpoint
+app.post('/api/staff/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
+
+  try {
+    // Find the staff member by email
+    const staff = await Staff.findOne({ where: { email } });
+    if (!staff) {
+      return res.status(401).json({ message: 'Invalid email or password.' });
+    }
+
+    // Compare the provided password with the stored hash
+    const isMatch = await bcrypt.compare(password, staff.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Invalid email or password.' });
+    }
+
+    // For now, we'll just send a success message.
+    // In a real application, this is where you would create a session or JWT.
+    res.status(200).json({ message: 'Login successful!', staffId: staff.staff_id });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(500).json({ message: 'An error occurred during login.' });
+  }
+});
+
 sequelize.sync().then(() => {
   app.listen(port, () => {
     console.log(`qrnode-ui server listening at http://localhost:${port}`);

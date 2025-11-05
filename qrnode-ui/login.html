@@ -19,18 +19,18 @@
         </div>
 
         <div id="login-tab" class="content-tab">
-          <form>
+          <form id="login-form">
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
-                <input class="input" type="email" placeholder="e.g. alex@example.com" required>
+                <input id="login-email" class="input" type="email" placeholder="e.g. alex@example.com" required>
               </div>
             </div>
 
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input" type="password" placeholder="********" required>
+                <input id="login-password" class="input" type="password" placeholder="********" required>
               </div>
             </div>
 
@@ -41,25 +41,25 @@
         </div>
 
         <div id="signup-tab" class="content-tab" style="display: none;">
-          <form>
+          <form id="signup-form">
             <div class="field">
               <label class="label">Email</label>
               <div class="control">
-                <input class="input" type="email" placeholder="e.g. alex@example.com" required>
+                <input id="signup-email" class="input" type="email" placeholder="e.g. alex@example.com" required>
               </div>
             </div>
 
             <div class="field">
               <label class="label">Password</label>
               <div class="control">
-                <input class="input" type="password" placeholder="********" required>
+                <input id="signup-password" class="input" type="password" placeholder="********" required>
               </div>
             </div>
 
             <div class="field">
                 <label class="label">Confirm Password</label>
                 <div class="control">
-                  <input class="input" type="password" placeholder="********" required>
+                  <input id="signup-confirm-password" class="input" type="password" placeholder="********" required>
                 </div>
               </div>
 
@@ -73,6 +73,9 @@
   </div>
 
   <script src="/assets/js/login-ui.js"></script>
+  <!-- The auth.js is responsible for checking if the user already has signed in all across the webpage -->
   <script src="/assets/js/auth.js"></script>
+  <script src="/assets/js/signup.js"></script>
+  <script src="/assets/js/login.js"></script>
 </body>
 </html>
