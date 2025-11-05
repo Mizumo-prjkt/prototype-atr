@@ -1,3 +1,4 @@
+students table
 |cid|name                |type   |notnull|dflt_value|pk |
 |---|--------------------|-------|-------|----------|---|
 |0  |id                  |INTEGER|0      |          |1  |
@@ -10,3 +11,36 @@
 |7  |is_authorized       |BOOLEAN|1      |0         |0  |
 |8  |school_id_expiration|DATE   |0      |          |0  |
 |9  |image_directory     |TEXT   |0      |          |0  |
+
+
+designation table
+|cid|name    |type|notnull|dflt_value|pk |
+|---|--------|----|-------|----------|---|
+|0  |post_id |TEXT|0      |          |1  |
+|1  |location|TEXT|1      |          |0  |
+|2  |heading |TEXT|1      |          |0  |
+
+entry_logs table
+|cid|name        |type    |notnull|dflt_value       |pk |
+|---|------------|--------|-------|-----------------|---|
+|0  |log_id      |INTEGER |0      |                 |1  |
+|1  |student_name|TEXT    |1      |                 |0  |
+|2  |student_id  |TEXT    |1      |                 |0  |
+|3  |staff_name  |TEXT    |1      |                 |0  |
+|4  |staff_type  |TEXT    |1      |                 |0  |
+|5  |staff_id    |TEXT    |1      |                 |0  |
+|6  |timestamp   |DATETIME|0      |CURRENT_TIMESTAMP|0  |
+|7  |post_id     |TEXT    |1      |                 |0  |
+
+staff table
+|cid|name        |type|notnull|dflt_value|pk |
+|---|------------|----|-------|----------|---|
+|0  |staff_id    |TEXT|0      |          |1  |
+|1  |full_name   |TEXT|1      |          |0  |
+|2  |phone_number|TEXT|1      |          |0  |
+|3  |address     |TEXT|1      |          |0  |
+|4  |email       |TEXT|0      |          |0  |
+|5  |staff_type  |TEXT|1      |          |0  |
+|6  |password    |TEXT|1      |          |0  |
+|7  |username    |TEXT|1      |          |0  |
+
