@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>qrnode-ui - Login</title>
   <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
   <div class="container" style="max-width: 400px;">
@@ -72,20 +72,7 @@
     </div>
   </div>
 
-  <script>
-    const tabs = document.querySelectorAll('.tabs li');
-    const tabContent = document.querySelectorAll('.content-tab');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(item => item.classList.remove('is-active'));
-        tab.classList.add('is-active');
-
-        const target = document.getElementById(tab.dataset.tab);
-        tabContent.forEach(content => content.style.display = 'none');
-        target.style.display = 'block';
-      });
-    });
-  </script>
+  <script src="/assets/js/login-ui.js"></script>
+  <script src="/assets/js/auth.js"></script>
 </body>
 </html>

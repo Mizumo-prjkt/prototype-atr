@@ -1,10 +1,14 @@
 const express = require('express');
 const path = require('path');
+const bcrypt = require('bcrypt');
+const { sequelize, Staff } = require('./database');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from the 'public' directory
+// Middleware to parse JSON bodies
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/assets', express.static(path.join(__dirname, 'assets'))); // Serve assets folder
 
@@ -20,15 +24,47 @@ app.get('/', (req, res) => {
 //   res.sendFile(path.join(__dirname, 'login.html'));
 // });
 
+// --- API Routes ---
 
+// Staff Signup Endpoint
+app.post('/api/staff/signup', async (req, res) => {
+  const { email, password, fullName, phoneNumber, address } = req.body;
 
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email and password are required.' });
+  }
 
+  try {
+    // Check if user already exists
+    const existingStaff = await Staff.findOne({ where: { email } });
+    if (existingStaff) {
+      return res.status(409).json({ message: 'An account with this email already exists.' });
+    }
 
-// A simple route for testing
-app.get('/api/hello', (req, res) => {
-  res.send('Hello from Express!');
+    // Hash the password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    // Create the new staff member
+    const newStaff = await Staff.create({
+      email,
+      password: hashedPassword,
+      username: email, // Using email as username for now
+      staff_type: 'teacher', // Default to 'teacher' to satisfy the CHECK constraint
+      full_name: fullName || '',
+      phone_number: phoneNumber || '',
+      address: address || ''
+    });
+
+    res.status(201).json({ message: 'Account created successfully!', staffId: newStaff.staff_id });
+  } catch (error) {
+    console.error('Signup Error:', error);
+    res.status(500).json({ message: 'An error occurred during account creation.' });
+  }
 });
 
-app.listen(port, () => {
-  console.log(`qrnode-ui server listening at http://localhost:${port}`);
+sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`qrnode-ui server listening at http://localhost:${port}`);
+  });
 });
