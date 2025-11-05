@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>qrnode-ui - Login</title>
+  <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+  <div class="container" style="max-width: 400px;">
+    <div class="card">
+      <div class="card-content">
+        <div class="tabs is-centered is-fullwidth">
+          <ul>
+            <li class="is-active" data-tab="login-tab"><a>Login</a></li>
+            <li data-tab="signup-tab"><a>Sign Up</a></li>
+          </ul>
+        </div>
+
+        <div id="login-tab" class="content-tab">
+          <form>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="email" placeholder="e.g. alex@example.com" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" placeholder="********" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <button class="button is-primary is-fullwidth">Login</button>
+            </div>
+          </form>
+        </div>
+
+        <div id="signup-tab" class="content-tab" style="display: none;">
+          <form>
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="email" placeholder="e.g. alex@example.com" required>
+              </div>
+            </div>
+
+            <div class="field">
+              <label class="label">Password</label>
+              <div class="control">
+                <input class="input" type="password" placeholder="********" required>
+              </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Confirm Password</label>
+                <div class="control">
+                  <input class="input" type="password" placeholder="********" required>
+                </div>
+              </div>
+
+            <div class="field">
+              <button class="button is-success is-fullwidth">Sign Up</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const tabs = document.querySelectorAll('.tabs li');
+    const tabContent = document.querySelectorAll('.content-tab');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(item => item.classList.remove('is-active'));
+        tab.classList.add('is-active');
+
+        const target = document.getElementById(tab.dataset.tab);
+        tabContent.forEach(content => content.style.display = 'none');
+        target.style.display = 'block';
+      });
+    });
+  </script>
+</body>
+</html>
