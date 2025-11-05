@@ -3,7 +3,7 @@ const { Sequelize, DataTypes } = require('sequelize');
 // Initialize Sequelize with SQLite
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: './testdatabase' // Path to your SQLite database file
+  storage: './testdatabase.db' // Path to your SQLite database file
 });
 
 // Define the Staff model based on your dbstructure-testdatabase.txt
